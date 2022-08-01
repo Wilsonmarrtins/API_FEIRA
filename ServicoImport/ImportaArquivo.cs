@@ -20,8 +20,10 @@ namespace ServicoImport
         public IConfiguration Configuration { get; }
         public void Importar()
         {
-            string Entrada  = _settings.GetSection("Diretorios:Entrada").Value;
-            string Saida    = _settings.GetSection("Diretorios:Saida").Value;
+            string Entrada      = _settings.GetSection("Diretorios:Entrada").Value;
+            string Saida        = _settings.GetSection("Diretorios:Saida").Value;
+            string Delimitador  = _settings.GetSection("Diretorios:Delimitador").Value;
+            string Extencao     = _settings.GetSection("Diretorios:Extencao").Value;
 
 
             if (!Directory.Exists(Entrada))
@@ -29,7 +31,7 @@ namespace ServicoImport
 
             DirectoryInfo diretorioEntrada = new(Entrada);
             List<FileInfo> arquivos = new();
-            arquivos.AddRange(diretorioEntrada.GetFiles("*.csv"));
+            arquivos.AddRange(diretorioEntrada.GetFiles(Extencao));
 
             if (arquivos.Count > 0)
                 if (!Directory.Exists(Saida))
@@ -51,7 +53,7 @@ namespace ServicoImport
                     try
                     {
                         var a = new Entities.Arquivo();
-                        var coluna = item.Split(',').ToList();
+                        var coluna = item.Split(Delimitador).ToList();
                         a.ID            = coluna[0];
                         a.LON           = coluna[1];
                         a.LAT           = coluna[2];

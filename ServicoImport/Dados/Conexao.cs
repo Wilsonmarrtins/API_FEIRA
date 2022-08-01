@@ -12,13 +12,13 @@ namespace ServicoImport.Dados
 {
     public class Conexao
     {
-        MySqlConnection con = new MySqlConnection();
+        readonly MySqlConnection con = new();
         public Conexao()
         {
             con.ConnectionString = "Server=robb0260.publiccloud.com.br; Port=3306; Database=maochuen_wilson; Uid=maoch_wilson; Pwd=Guilherme123!@#;";
         }
 
-        public MySqlConnection conectar()
+        public MySqlConnection Conectar()
         {
             if (con.State == System.Data.ConnectionState.Closed)
             {
@@ -32,7 +32,7 @@ namespace ServicoImport.Dados
             return con;
         }
 
-        public void desconectar()
+        public void Desconectar()
         {
             if (con.State == System.Data.ConnectionState.Open)
             {
@@ -41,14 +41,15 @@ namespace ServicoImport.Dados
         }
         protected List<T> ExecutaSelectLista<T>(string query)
         {
-            using (var connection = conectar())
+            using (var connection = Conectar())
             {
                 return connection.Query<T>(query).AsList();
             }
         }
+
         protected T ExecutaSelect<T>(string sqlQuery)
         {
-            using (var connection = conectar())
+            using (var connection = Conectar())
             {
                 return connection.QueryFirstOrDefault<T>(sqlQuery);
             }
@@ -56,7 +57,7 @@ namespace ServicoImport.Dados
 
         protected bool ExecutaComando(string sqlQuery)
         {
-            using (var connection = conectar())
+            using (var connection = Conectar())
             {
                 return connection.Execute(sqlQuery) > 0;
             }
@@ -64,7 +65,7 @@ namespace ServicoImport.Dados
 
         protected T EXECUTAPROC<T>(string sqlQuery)
         {
-            using (var connection = conectar())
+            using (var connection = Conectar())
             {
                 return connection.QueryFirstOrDefault<T>(sqlQuery);
             }
