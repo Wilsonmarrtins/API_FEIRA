@@ -14,10 +14,7 @@ namespace Api_Business.Interface
         Task<bool>Cadastrar(FeiraDTO Entrada);
         Task<bool>Delete (int Codigo);
         Task<List<FeiraDTO>>Consulta(string regiao5);
-
         Task<bool>Alterar(FeiraDTO Entrada);
         Task<FeiraData> ConverteObjeto(FeiraDTO O);
-
-
     }
 }
