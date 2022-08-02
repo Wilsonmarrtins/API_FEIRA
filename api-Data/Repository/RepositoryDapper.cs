@@ -19,7 +19,7 @@ namespace api_Data.Repository
             var retorno = new UsuarioDTO();
             try
             {
-                var sqlQuery = $@"select * from usuario where usuario = '{Usuario.Usuario}' and senha = '{Usuario.Senha}';";
+                var sqlQuery = $@"select * from usuario where usuario = '{Usuario.Usuario}' and senha = '{Usuario.Senha}'";
                 Log.Information($"Persistindo os dados no BD");
                 retorno = await ExecutaSelect<UsuarioDTO>(sqlQuery);
             }
@@ -95,6 +95,7 @@ namespace api_Data.Repository
             var retorno = false;
             try
             {
+
                 Log.Information($"Persistindo os dados no BD");
                 retorno = await UpdateContrib(item);
             }
