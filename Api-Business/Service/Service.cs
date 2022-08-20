@@ -130,6 +130,7 @@ namespace Api_Business.Service
                 BAIRRO      = O.BAIRRO,
                 REFERENCIA  = O.REFERENCIA
             };
+
             return retorno;
         }
     }
